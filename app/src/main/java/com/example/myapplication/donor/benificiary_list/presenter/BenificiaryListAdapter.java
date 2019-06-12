@@ -6,34 +6,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.example.myapplication.R;
+import com.example.myapplication.RecyclerViewClickListener;
 import com.example.myapplication.donor.benificiary_list.model.BenificiaryListModel;
-import com.example.myapplication.donor.home.model.HomeModel;
-import com.example.myapplication.donor.home.presenter.CategoryListAdapter;
-import com.example.myapplication.network.WebServiceURLs;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BenificiaryListAdapter extends RecyclerView.Adapter<BenificiaryListAdapter.ViewHolder> {
+
+public class BenificiaryListAdapter extends RecyclerView.Adapter<BenificiaryListAdapter.ViewHolder>  {
     List<BenificiaryListModel> list=new ArrayList<>();
     Context context;
-
-    public BenificiaryListAdapter(List<BenificiaryListModel> list, Context context) {
+    private RecyclerViewClickListener mListener;
+    public BenificiaryListAdapter(List<BenificiaryListModel> list, Context context, RecyclerViewClickListener mListener) {
         this.list = list;
         this.context = context;
+        this.mListener=mListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.row_benificiary_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
+        ViewHolder viewHolder = new ViewHolder(listItem,mListener);
         return viewHolder;
     }
 
@@ -55,7 +53,9 @@ public class BenificiaryListAdapter extends RecyclerView.Adapter<BenificiaryList
         return list.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.tv_loc)
         public TextView tv_loc;
         @BindView(R.id.btn_donate)
@@ -71,10 +71,18 @@ public class BenificiaryListAdapter extends RecyclerView.Adapter<BenificiaryList
         @BindView(R.id.tv_full_name)
         TextView tv_full_name;
 
-
-        public ViewHolder(View itemView) {
+        private RecyclerViewClickListener mListener;
+        public ViewHolder(View itemView,RecyclerViewClickListener listener) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            mListener = listener;
+            btn_view_details.setOnClickListener(this);
+            btn_donate.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mListener.onClick(view, getAdapterPosition());
         }
     }
 }

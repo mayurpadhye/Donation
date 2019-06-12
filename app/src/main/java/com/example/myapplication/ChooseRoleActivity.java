@@ -28,9 +28,14 @@ public class ChooseRoleActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         if (PrefManager.getInstance(ChooseRoleActivity.this).IS_LOGIN())
         {
-            if (PrefManager.getInstance(ChooseRoleActivity.this).getRole().equals("1"));
+            if (PrefManager.getInstance(ChooseRoleActivity.this).getRole().equals("1"))
             {
                 startActivity(new Intent(ChooseRoleActivity.this, BenificiaryHomeActivity.class));
+                finish();
+            }
+            else
+            {
+                startActivity(new Intent(ChooseRoleActivity.this, HomeActivity.class));
                 finish();
             }
         }

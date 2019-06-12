@@ -48,11 +48,6 @@ public class EventImagesAdapter extends RecyclerView.Adapter<EventImagesAdapter.
             holder.iv_activity.setImageBitmap(result_list.get(position).getBitmap());
 
 
-           // Picasso.with(mContext).load(result_list.get(position).getPath()).into(holder.iv_activity);
-            // Picasso.with(mctx).load(WebServiceURLs.SHOP_IMAGE + items.getImage2()).into(holder.iv_product_image2);
-
-
-
             Log.i("imagePathhhhhBitmap",result_list.get(position).getPath());
         }else{
             Picasso.with(mContext).load(result_list.get(position).getPath()).into(holder.iv_activity);
@@ -82,7 +77,6 @@ public class EventImagesAdapter extends RecyclerView.Adapter<EventImagesAdapter.
             iv_activity = view.findViewById(R.id.img_event_file);
             iv_activity.setOnClickListener(this);
             iv_remove=view.findViewById(R.id.img_remove);
-            // iv_remove.setOnClickListener(this);
             iv_icon = view.findViewById(R.id.img_icon);
             iv_icon.setVisibility(View.GONE);
         }

@@ -11,4 +11,13 @@ public interface IBenificiaryListModel {
     }
 
     public void getBenificairyList(String location_id,String category_id,onBenificiaryListListener onBenificiaryListListener);
+    interface onDonorRegistration
+    {
+        void onDonorRegistrationFinished(String status,String message,String user_id);
+        void onDonorRegistrationFailure(Throwable t);
+    }
+
+    public void doRegistration(String name,String age,String mobile,String password,String loc_id,onDonorRegistration onDonorRegistration);
+
+
 }

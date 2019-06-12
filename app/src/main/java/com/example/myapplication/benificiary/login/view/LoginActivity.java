@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
                 PrefManager.getInstance(LoginActivity.this).setUserId(user_id);
                 PrefManager.getInstance(LoginActivity.this).setIsLogin(true);
                 PrefManager.getInstance(LoginActivity.this).setMobile(mob_no);
-                PrefManager.getInstance(LoginActivity.this).setRole(role);
+                PrefManager.getInstance(LoginActivity.this).setRole("1");
                 PrefManager.getInstance(LoginActivity.this).setLocationId(location_id);
                 PrefManager.getInstance(LoginActivity.this).setCategoryId(category_id);
                 startActivity(new Intent(LoginActivity.this,BenificiaryHomeActivity.class));
@@ -97,6 +97,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
         } catch (JSONException e) {
             e.printStackTrace();
+            Toast.makeText(this, ""+e.toString(), Toast.LENGTH_SHORT).show();
         }
 
     }

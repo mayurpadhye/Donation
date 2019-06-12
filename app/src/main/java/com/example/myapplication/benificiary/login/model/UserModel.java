@@ -18,11 +18,11 @@ public class UserModel implements IUser {
 
 
     @Override
-    public void doLogin(String user_name, String password, final onLoginRquestListener onLoginRquestListener) {
+    public void doLogin(String user_name, String password,String role, final onLoginRquestListener onLoginRquestListener) {
 
         RetrofitClient retrofitClient = new RetrofitClient();
         RestInterface service = retrofitClient.getAPIClient(WebServiceURLs.DOMAIN_NAME);
-        service.user_login(user_name,password,new Callback<JsonElement>() {
+        service.user_login(user_name,password,role,new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
                 try {

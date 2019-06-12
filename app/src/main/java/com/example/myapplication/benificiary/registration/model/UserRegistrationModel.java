@@ -28,14 +28,13 @@ public class UserRegistrationModel implements IUserRegis {
     }
 
     @Override
-    public void signUpUser(String name, String age, String cat_id, String location_id, String mobile_no, String pass, String role, final onRegistrationRequestListener onRegistrationRequestListener) {
+    public void signUpUser(String name, String age, String cat_id, String location_id, String mobile_no, String ifsc,String account_no,String bank_name,String acc_holder_name,String pass, String role,String permanent_address, final onRegistrationRequestListener onRegistrationRequestListener) {
 
         RetrofitClient retrofitClient = new RetrofitClient();
         RestInterface service = retrofitClient.getAPIClient(WebServiceURLs.DOMAIN_NAME);
-        service.register_user(name, age, cat_id, location_id, mobile_no, pass, role, new Callback<JsonElement>() {
+        service.register_user(name, age, cat_id, location_id, mobile_no,ifsc,account_no,bank_name,acc_holder_name,permanent_address ,pass, role, new Callback<JsonElement>() {
             @Override
             public void success(JsonElement jsonElement, Response response) {
-
                 try {
                     JSONObject jsonObject = new JSONObject(jsonElement.toString());
                     String status = jsonObject.getString("status");

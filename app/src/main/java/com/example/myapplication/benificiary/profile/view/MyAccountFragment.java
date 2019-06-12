@@ -1,6 +1,7 @@
 package com.example.myapplication.benificiary.profile.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.example.myapplication.ChooseRoleActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.benificiary.profile.presenter.IProfilePresenter;
 import com.example.myapplication.benificiary.profile.presenter.ProfilePresenter;
+import com.example.myapplication.helperClass.PrefManager;
 
 public class MyAccountFragment extends Fragment implements IAccountView{
 
@@ -30,12 +33,16 @@ public class MyAccountFragment extends Fragment implements IAccountView{
             TextView tv_ful_name;
     @BindView(R.id.tv_email)
     TextView tv_email;
-    @BindView(R.id.tv_mobile)
-    TextView tv_mobile;
+    @BindView(R.id.tv_mobile_no)
+    TextView tv_mobile_no;
     @BindView(R.id.tv_age)
     TextView tv_age;
     @BindView(R.id.tv_cat)
     TextView tv_cat;
+
+    @BindView(R.id.tv_logout)
+            TextView tv_logout;
+
     IProfilePresenter iProfilePresenter;
     public MyAccountFragment() {
         // Required empty public constructor
@@ -69,6 +76,14 @@ public class MyAccountFragment extends Fragment implements IAccountView{
         getActivity().setTitle("My Profile");
         iProfilePresenter=new ProfilePresenter(getActivity(),this);
         iProfilePresenter.requestProfileData();
+        tv_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ChooseRoleActivity.class));
+                getActivity().finish();
+                PrefManager.getInstance(getActivity()).Logout();
+            }
+        });
         return v;
 
     }
@@ -104,11 +119,12 @@ public class MyAccountFragment extends Fragment implements IAccountView{
 
     @Override
     public void getProfileData(String full_name, String age, String mobile_no, String profile_pic, String total_amount, String loc_name, String cat_name) {
-        tv_cat.setText(cat_name);
-        tv_age.setText(age+" Years");
+        tv_cat.append(cat_name);
+        tv_age.append(age+" Years");
         tv_email.setText("");
-        tv_location.setText(loc_name);
+        tv_location.append(loc_name);
         tv_ful_name.setText(full_name);
+        tv_mobile_no.setText(mobile_no);
     }
 
     @Override

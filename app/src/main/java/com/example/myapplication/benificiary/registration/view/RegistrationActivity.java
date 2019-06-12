@@ -47,6 +47,18 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
     ProgressBar p_bar;
     @BindView(R.id.sp_cat)
     Spinner sp_cat;
+    @BindView(R.id.et_account_holder_name)
+    EditText et_account_holder_name;
+
+    @BindView(R.id.et_ifsc)
+    EditText et_ifsc;
+
+    @BindView(R.id.et_account_no)
+    EditText et_account_no;
+    @BindView(R.id.et_bank_name)
+    EditText et_bank_name;
+
+
     List<CategoryListModel> listModels = new ArrayList<>();
     List<LocationModel> locationModelList1 = new ArrayList<>();
     String cat_id = "";
@@ -66,7 +78,7 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iRegistrationPresenter.checkValidation(et_name.getText().toString().trim(), et_age.getText().toString().trim(), cat_id, loc_id, et_mobile.getText().toString().trim(), et_pass.getText().toString(), "1");
+                iRegistrationPresenter.checkValidation(et_name.getText().toString().trim(), et_age.getText().toString().trim(), cat_id, loc_id, et_mobile.getText().toString().trim(),et_ifsc.getText().toString().trim(),et_account_no.getText().toString(),et_bank_name.getText().toString(),et_account_holder_name.getText().toString().trim().trim(), et_pass.getText().toString(), "1");
 
 
             }
@@ -81,7 +93,8 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
                     cat_id = "";
                 }
             }
-           @Override
+
+            @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
@@ -89,15 +102,16 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
         sp_location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               if (position > 0) {
+                if (position > 0) {
                     loc_id = locationModelList1.get(position).getLoc_id();
                 } else {
                     loc_id = "";
                 }
             }
-          @Override
+
+            @Override
             public void onNothingSelected(AdapterView<?> parent) {
-           }
+            }
         });
     }
 
@@ -119,8 +133,9 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
     public void RegistrationResult(String result, String message) {
         if (result.equals("0")) {
             Toast.makeText(this, "" + message, Toast.LENGTH_SHORT).show();
+
         } else {
-            Toast.makeText(this, "" + message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + message + " Please Login To Continue", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
             finish();
         }
@@ -172,10 +187,24 @@ public class RegistrationActivity extends AppCompatActivity implements IRegistra
                 Toast.makeText(this, "Please Enter Valid Mobile Number", Toast.LENGTH_SHORT).show();
                 break;
             case 6:
-                et_pass.setError("Enter Password");
+                et_ifsc.setError("Invalid IFSC Code");
                 break;
             case 7:
-                iRegistrationPresenter.doRegistration(et_name.getText().toString().trim(), et_age.getText().toString().trim(), cat_id, loc_id, et_mobile.getText().toString().trim(), et_pass.getText().toString(), "1");
+
+                et_account_no.setError("Enter Valid Account number");
+                break;
+            case 8:
+                et_bank_name.setError("Enter bank name");
+                break;
+            case 9:
+                et_account_holder_name.setError("Enter Account holder name");
+                break;
+
+                case 10:
+                et_pass.setError("Enter Password");
+                break;
+            case 11:
+                iRegistrationPresenter.doRegistration(et_name.getText().toString().trim(), et_age.getText().toString().trim(), cat_id, loc_id, et_mobile.getText().toString().trim(),et_ifsc.getText().toString().trim(),et_account_no.getText().toString(),et_bank_name.getText().toString(),et_account_holder_name.getText().toString().trim().trim(),et_location.getText().toString(), et_pass.getText().toString(), "1");
                 break;
         }
 

@@ -36,7 +36,7 @@ public class LoginPresenterCompl  implements ILoginPresenter,IUser.onLoginRquest
     @Override
     public void doLogin(String name, String pass) {
         iLoginView.setProgressBarVisibility(View.VISIBLE);
-        user.doLogin(name,pass,this);
+        user.doLogin(name,pass,"1",this);
 
     }
 

@@ -10,6 +10,6 @@ public interface IUser {
         void onLoginRequestFailure(Throwable t);
     }
 
-    public void doLogin(String user_name,String password,onLoginRquestListener onLoginRquestListener);
+    public void doLogin(String user_name,String password,String role,onLoginRquestListener onLoginRquestListener);
 
 }

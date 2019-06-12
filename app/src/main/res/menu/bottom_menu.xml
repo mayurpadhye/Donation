@@ -9,10 +9,10 @@
             app:showAsAction="ifRoom"/>
 
     <item
-            android:id="@+id/action_gps"
+            android:id="@+id/action_donation"
             android:enabled="true"
-            android:title="Location"
-            android:icon="@drawable/gps"
+            android:title="Donation"
+            android:icon="@drawable/social_care"
             app:showAsAction="ifRoom"/>
 
     <item

@@ -178,4 +178,34 @@ public class BenificiaryListModel implements IBenificiaryListModel {
             }
         });
     }
+
+    @Override
+    public void doRegistration(String name, String age, String mobile, String password, String loc_id,final onDonorRegistration onDonorRegistration) {
+        RetrofitClient retrofitClient = new RetrofitClient();
+        RestInterface service = retrofitClient.getAPIClient(WebServiceURLs.DOMAIN_NAME);
+        service.register_donor_user(name, age,  mobile,"2", password,loc_id,"0", new Callback<JsonElement>() {
+            @Override
+            public void success(JsonElement jsonElement, Response response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonElement.toString());
+                    String status = jsonObject.getString("status");
+                    String message = jsonObject.getString("message");
+                    String user_id = jsonObject.getString("user_id");
+                    if (status.equals("1"))
+                    onDonorRegistration.onDonorRegistrationFinished(status, message,user_id);
+                    else
+                        onDonorRegistration.onDonorRegistrationFinished(status, message,"0");
+                }
+                catch (JSONException | NullPointerException e) {
+                    onDonorRegistration.onDonorRegistrationFailure(e);
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d(TAG, "failure: " + error);
+                onDonorRegistration.onDonorRegistrationFailure(error);
+            }
+        });
+    }
 }

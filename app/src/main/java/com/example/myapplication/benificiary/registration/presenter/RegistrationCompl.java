@@ -34,7 +34,7 @@ IUserRegis iUserRegis;
     }
 
     @Override
-    public void checkValidation(String name,String age,String cat_id,String location_id,String mobile_no,String pass,String role) {
+    public void checkValidation(String name,String age,String cat_id,String location_id,String mobile_no,String ifsc,String account_no,String bank_name,String acc_holder_name,String pass,String role) {
 
        if (name.isEmpty())
        {
@@ -57,13 +57,31 @@ IUserRegis iUserRegis;
        {
            iRegistrationView.validationResult(0,5);
        }
-       else if (pass.isEmpty())
+
+       else if (!isIfscCodeValid(ifsc))
        {
            iRegistrationView.validationResult(0,6);
        }
+       else if (account_no.isEmpty())
+       {
+           iRegistrationView.validationResult(0,7);
+       }
+       else if (bank_name.isEmpty())
+       {
+           iRegistrationView.validationResult(0,8);
+       }
+       else if (acc_holder_name.isEmpty())
+       {
+           iRegistrationView.validationResult(0,9);
+       }
+       else if (pass.isEmpty())
+       {
+           iRegistrationView.validationResult(0,10);
+       }
+
        else
        {
-           iRegistrationView.validationResult(1,7);
+           iRegistrationView.validationResult(1,11);
        }
     }
     public boolean isValidPhone(CharSequence phone) {
@@ -73,12 +91,21 @@ IUserRegis iUserRegis;
             return android.util.Patterns.PHONE.matcher(phone).matches();
         }
     }
+    public static boolean isIfscCodeValid(String email)
+    {
+        String regExp = "^[A-Z]{4}[0][A-Z0-9]{6}$";
+        boolean isvalid = false;
 
+        if (email.length() > 0) {
+            isvalid = email.matches(regExp);
+        }
+        return isvalid;
+    }
     @Override
-    public void doRegistration(String name,String age,String cat_id,String location_id,String mobile_no,String pass,String role) {
+    public void doRegistration(String name,String age,String cat_id,String location_id,String mobile_no,String ifsc,String account_no,String bank_name,String acc_holder_name,String permenant_address,String pass,String role) {
 
         iRegistrationView.setProgressVisibility(View.VISIBLE);
-       iUserRegis.signUpUser(name,age,cat_id,location_id,mobile_no,pass,role,this);
+       iUserRegis.signUpUser(name,age,cat_id,location_id,mobile_no,ifsc,account_no,bank_name,acc_holder_name,permenant_address,pass,role,this);
 
 
     }
