@@ -5,7 +5,7 @@ import com.example.myapplication.donor.donation_history.model.DonationHistoryMod
 import java.util.List;
 
 public interface IDonationHistoryView {
-    public void getDonationHistory(List<DonationHistoryModel> donationHistoryModelList);
+    public void getDonationHistory(String total_amount,List<DonationHistoryModel> donationHistoryModelList);
     public void donationHistoryFailure(Throwable t);
     public void setProgressVisibility(int visibility);
 

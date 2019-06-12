@@ -105,7 +105,16 @@ public interface RestInterface {
   void request_donation(
           @Body MultipartTypedOutput attachments,  Callback<JsonElement> callback);
 
+
+  @GET(WebServiceURLs.GET_DONATION_HISTORY)
+  void getDonationHistory(Callback<JsonElement> callback);
+
+
+
+
   @POST(WebServiceURLs.ADD_DONATION_DETAILS)
   void add_donation_details(
           @Body MultipartTypedOutput attachments,  Callback<JsonElement> callback);
 }
+
+

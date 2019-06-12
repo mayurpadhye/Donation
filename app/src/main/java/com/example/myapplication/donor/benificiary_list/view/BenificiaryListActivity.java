@@ -1,5 +1,6 @@
 package com.example.myapplication.donor.benificiary_list.view;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -252,5 +253,11 @@ public class BenificiaryListActivity extends AppCompatActivity implements IBenif
                break;
 
         }
+    }
+
+    public void viewDonationDetails()
+    {
+        Dialog dialog=new Dialog(this);
+
     }
 }

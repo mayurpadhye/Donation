@@ -16,7 +16,7 @@
                 android:layout_margin="20dp"
                 android:orientation="vertical">
             <ImageView
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:src="@drawable/donor"
                     android:layout_gravity="center_horizontal"
